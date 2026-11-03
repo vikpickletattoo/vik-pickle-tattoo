@@ -1,7 +1,6 @@
 {
   "name": "raising-cain-signs",
-  "homepage": "https://vikpickletattoo.github.io/vik-pickle-tattoo",
-  "private": true,
+  "homepage": "https://vikpickletattoo.github.io",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
