@@ -20,6 +20,7 @@ export default function Hero() {
           key={slide.id}
           src={slide.src}
           alt={slide.alt}
+          loading="lazy"
           className="absolute inset-0 w-full h-full object-cover"
           initial={{ opacity: 0, scale: 1.04 }}
           animate={{ opacity: 0.55, scale: 1 }}
