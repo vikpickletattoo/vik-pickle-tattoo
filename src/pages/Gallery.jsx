@@ -5,20 +5,22 @@ export default function Gallery() {
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
 
-  // Dynamically load images using import.meta.glob
+  // Fetch image URLs from the JSON file
   useEffect(() => {
-    const importAllImages = async () => {
-      const imageModules = import.meta.glob('../assets/gallery/*.{png,jpg,jpeg,gif}');
-      const loadedImages = await Promise.all(
-        Object.keys(imageModules).map(async (path) => {
-          const module = await imageModules[path]();
-          return module.default;
-        })
-      );
-      setImages(loadedImages);
+    const fetchImageUrls = async () => {
+      try {
+        const response = await fetch('/src/assets/image-urls.json'); // Adjust the path if necessary
+        if (!response.ok) {
+          throw new Error('Failed to fetch image URLs');
+        }
+        const data = await response.json();
+        setImages(data);
+      } catch (error) {
+        console.error('Error fetching image URLs:', error);
+      }
     };
 
-    importAllImages();
+    fetchImageUrls();
   }, []);
 
   return (
