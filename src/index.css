@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-cream text-ink font-body antialiased;
+  }
+  h1, h2, h3, h4 { @apply font-display; }
+}
+
+@layer components {
+  .nav-link {
+    @apply relative font-body text-sm font-light uppercase tracking-[0.1em] text-cream/80 transition-colors duration-300 hover:text-gold;
+  }
+  .nav-link::after {
+    content: "";
+    @apply absolute -bottom-0.5 left-0 h-px w-0 bg-gold transition-all duration-300;
+  }
+  .nav-link:hover::after,
+  .nav-link.active::after { @apply w-full; }
+  .nav-link.active { @apply text-gold; }
+
+  .btn-primary {
+    @apply inline-block cursor-pointer border border-gold px-8 py-3 font-body text-sm uppercase tracking-[0.1em] text-gold transition-all duration-300 hover:bg-gold hover:text-ink;
+  }
+  .btn-secondary {
+    @apply inline-block cursor-pointer border border-cream px-8 py-3 font-body text-sm uppercase tracking-[0.1em] text-cream transition-all duration-300 hover:bg-cream hover:text-ink;
+  }
+  .section-title {
+    @apply font-display text-4xl md:text-5xl leading-tight text-ink;
+  }
+  .section-label {
+    @apply font-body text-xs font-light uppercase tracking-[0.25em] text-gold;
+  }
+  .input-field {
+    @apply w-full border-b border-ink/30 bg-transparent px-0 py-3 font-body text-sm font-light text-ink placeholder:text-ink/40 transition-colors duration-300 focus:border-gold focus:outline-none;
+  }
+}
