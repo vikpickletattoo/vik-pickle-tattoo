@@ -7,10 +7,10 @@ import oldMagicShopfront from '../assets/old-magic.png'
 
 
 const services = [
-  { title: 'Traditional', desc: 'short description' },
-  { title: 'Japanese Traditional', desc: 'short description' },
-  { title: 'Neo-traditional', desc: 'short description' },
-  { title: 'Custom work', desc: 'short description' },
+  { title: 'Traditional', desc: 'short descriptions' },
+  { title: 'Japanese Traditional', desc: 'short descriptions' },
+  { title: 'Neo-traditional', desc: 'short descriptions' },
+  { title: 'Custom work', desc: 'short descriptions' },
 ]
 
 const cardVariants = {
