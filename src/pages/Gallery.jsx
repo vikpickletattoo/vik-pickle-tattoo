@@ -9,7 +9,7 @@ export default function Gallery() {
   useEffect(() => {
     const fetchImageUrls = async () => {
       try {
-        const response = await fetch('/vik-pickle-tattoo/src/assets/image-urls.json'); // Adjust the path if necessary
+        const response = await fetch('./assets/image-urls.json');
         if (!response.ok) {
           throw new Error('Failed to fetch image URLs');
         }

@@ -30,13 +30,13 @@ const fetchImages = async () => {
     // Extract image URLs
     const imageUrls = result.resources.map((resource) => resource.secure_url);
 
-    // Ensure the src/assets directory exists
-    const assetsDir = path.join(__dirname, 'src', 'assets');
+    // Ensure the public/assets directory exists
+    const assetsDir = path.join(__dirname, 'public', 'assets');
     if (!fs.existsSync(assetsDir)) {
       fs.mkdirSync(assetsDir, { recursive: true });
     }
 
-    // Write URLs to a JSON file in the src/assets folder
+    // Write URLs to a JSON file in the public/assets folder
     const filePath = path.join(assetsDir, 'image-urls.json');
     fs.writeFileSync(filePath, JSON.stringify(imageUrls, null, 2));
 
