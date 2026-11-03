@@ -4,6 +4,7 @@ import PageTransition from '../components/PageTransition.jsx';
 export default function Gallery() {
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // Fetch image URLs from the JSON file
   useEffect(() => {
@@ -15,8 +16,10 @@ export default function Gallery() {
         }
         const data = await response.json();
         setImages(data);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching image URLs:', error);
+        setLoading(false);
       }
     };
 
@@ -44,21 +47,26 @@ export default function Gallery() {
       </div>
 
       <section className="bg-cream py-20 px-6">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {images.map((image, index) => (
-            <div
-              key={index}
-              className="relative w-full aspect-square overflow-hidden rounded-lg"
-            >
-              <img
-                src={image}
-                alt={`Gallery Image ${index + 1}`}
-                className="object-cover w-full h-full cursor-pointer hover:opacity-80 transition-opacity"
-                onClick={() => setSelectedImage(image)}
-              />
-            </div>
-          ))}
-        </div>
+        {loading ? (
+          <div className="text-center text-gray-500">Loading images...</div>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            {images.map((image, index) => (
+              <div
+                key={index}
+                className="relative w-full aspect-square overflow-hidden rounded-lg"
+              >
+                <img
+                  src={image}
+                  alt={`Gallery Image ${index + 1}`}
+                  loading="lazy"
+                  className="object-cover w-full h-full cursor-pointer hover:opacity-80 transition-opacity"
+                  onClick={() => setSelectedImage(image)}
+                />
+              </div>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* Lightbox/Modal */}
