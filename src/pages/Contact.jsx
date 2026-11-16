@@ -69,26 +69,46 @@ export default function Contact() {
               <form ref={formRef} onSubmit={handleSubmit} className="space-y-8">
                 <div>
                   <label className={labelClass} htmlFor="from_name">Your name</label>
-                  <input id="from_name" name="from_name" type="text" required value={form.from_name} onChange={handleChange} placeholder="Jane Smith" className="input-field" />
+                  <input id="from_name" name="from_name" type="text" required value={form.from_name} onChange={handleChange} className="input-field" />
                 </div>
                 <div>
                   <label className={labelClass} htmlFor="from_email">Email address</label>
-                  <input id="from_email" name="from_email" type="email" required value={form.from_email} onChange={handleChange} placeholder="jane@example.com" className="input-field" />
+                  <input id="from_email" name="from_email" type="email" required value={form.from_email} onChange={handleChange} className="input-field" />
                 </div>
                 <div>
-                  <label className={labelClass} htmlFor="message">Tell me about your tattoo idea - describe your idea, approximate size, colour or black/grey, availability, as much detail as possible!</label>
+                  <label className={labelClass} htmlFor="message">Tell me about your tattoo idea - describe your idea, as much detail as possible!</label>
                   <textarea
                     id="message"
                     name="message"
                     required
-                    rows={5}
-                    value={form.message}
+                    rows={3}
+                    value={form.main_message}
                     onChange={handleChange}
-                    placeholder="Describe your idea, approximate size, colour or black/grey, availability, as much detail as possible!"
+                    placeholder="Tell me about your tattoo idea - describe your idea, as much detail as possible!"
                     className="input-field resize-none"
                   />
                 </div>
                 <div>
+                  <label className={labelClass} htmlFor="from_email">Approximate size (cm/inches)</label>
+                  <input id="from_email" name="from_email" type="email" required value={form.approx_size} placeholder="eg: 10cm" onChange={handleChange} className="input-field" />
+                </div>
+                <div>
+                  <label className={labelClass} htmlFor="from_email">Colour, or black & grey?</label>
+                  <input id="from_email" name="from_email" type="email" required value={form.colour_preference} placeholder="eg: Black & grey" onChange={handleChange} className="input-field" />
+                </div>
+                <div>
+                  <label className={labelClass} htmlFor="from_email">Placement, where would you like your tattoo to go?</label>
+                  <input id="from_email" name="from_email" type="email" required value={form.placement} placeholder="eg: Inner bicep" onChange={handleChange} className="input-field" />
+                </div>
+                <div>
+                  <label className={labelClass} htmlFor="from_email">Any existing tattoos that we'd need to work around?</label>
+                  <input id="from_email" name="from_email" type="email" required value={form.existing_pieces} placeholder="eg: I have a small piece towards inner elbow" onChange={handleChange} className="input-field" />
+                </div>
+                <div>
+                  <label className={labelClass} htmlFor="from_email">Availability, can you do weekdays or prefer weekends?</label>
+                  <input id="from_email" name="from_email" type="email" required value={form.availability} placeholder="eg: I'm only available on Saturdays" onChange={handleChange} className="input-field" />
+                </div>
+                {/* <div>
                   <label className={labelClass} htmlFor="project_type">Tattoo type</label>
                   <select id="project_type" name="project_type" value={form.project_type} onChange={handleChange} className="input-field bg-transparent">
                     <option value="">Select one…</option>
@@ -96,11 +116,11 @@ export default function Contact() {
                       <option key={t} value={t}>{t}</option>
                     ))}
                   </select>
-                </div>
+                </div> */}
 
                 {status === 'error' && (
                   <p className="text-red-600 text-xs font-body">
-                    Something went wrong — please try emailing me directly at raisingcainsigns@gmail.co.uk
+                    Something went wrong — please try emailing me directly at vikpickletattoo@protonmail.com
                   </p>
                 )}
 

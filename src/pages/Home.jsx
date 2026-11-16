@@ -3,15 +3,32 @@ import { motion } from 'framer-motion'
 import PageTransition from '../components/PageTransition.jsx'
 import Hero from '../components/Hero.jsx'
 import mothAndFlameShopfront from '../assets/moth-and-flame.png'
-import oldMagicShopfront from '../assets/old-magic.png'
+import oldMagicShopfront from '../assets/old-magic.jpeg'
 
 
 const services = [
   { title: 'Traditional', desc: 'short descriptions' },
   { title: 'Japanese Traditional', desc: 'short descriptions' },
-  { title: 'Neo-traditional', desc: 'short descriptions' },
+  { title: 'Fine line', desc: 'short descriptions' },
   { title: 'Custom work', desc: 'short descriptions' },
 ]
+
+const studios = [
+  {
+    name: "Old Magic Tattoo",
+    days: "Thursday - Saturday",
+    address: "83 St. Dunstans St, Canterbury, CT2 8AD",
+    instagram: "https://www.instagram.com/oldmagictattoo/",
+    image: oldMagicShopfront,
+  },
+  {
+    name: "Moth and Flame Tattoo",
+    days: "Sunday - Tuesday",
+    address: "79 Bromley Common, Bromley, BR2 9LP",
+    instagram: "https://www.instagram.com/mothandflametattoo/",
+    image: mothAndFlameShopfront,
+  },
+];
 
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -32,7 +49,7 @@ export default function Home() {
           <div className="mb-14 text-center">
             <h2 className="section-title">Vik Pickle Tattoo</h2>
             <p className="mt-5 mb-3">
-              blurb text goes here
+              I started in 2018 having developed my style in Japanese as well as traditional tattooing, dotwork and fine line. I work in both colour and black and grey, with custom pieces and flash work. Getting a tattoo is a personal experience with trust, communication and qiality of work being essential elements in my process and the experience I offer.
             </p>
           </div>
 
@@ -49,7 +66,7 @@ export default function Home() {
                 className="border-t border-gold pt-6"
               >
                 <h3 className="font-display text-xl text-ink mb-3">{s.title}</h3>
-                <p className="text-ink/60 font-body font-light text-sm leading-relaxed">{s.desc}</p>
+                {/* <p className="text-ink/60 font-body font-light text-sm leading-relaxed">{s.desc}</p> */}
               </motion.div>
             ))}
           </div>
@@ -57,31 +74,29 @@ export default function Home() {
       </section>
 
       <div className="max-w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-0">
-        <div className="relative">
-          <img
-            src={oldMagicShopfront}
-            alt="Old Magic Shop"
-            className="w-full h-auto object-cover"
-          />
-          <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-center text-white p-4">
-            <h3 className="text-2xl font-display mb-4">Old Magic Tattoo</h3>
-            <p className="text-sm font-body mb-4">83 St. Dunstans St, Canterbury, CT2 8AD</p>
-            <p className="text-sm font-body underline"><a target="_blank" aria-label="Instagram" href="https://www.instagram.com/oldmagictattoo/">@oldmagictattoo</a></p>
+        {studios.map((studio, index) => (
+          <div className="relative" key={index}>
+            <div
+              style={{
+                backgroundImage: `url(${studio.image})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                height: "500px", // Set a fixed height
+              }}
+              className="w-full"
+            ></div>
+            <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-center text-white p-4">
+              <h3 className="text-2xl font-display mb-4">{studio.name}</h3>
+              <p className="text-sm font-body mb-4">{studio.days}</p>
+              <p className="text-sm font-body mb-4">{studio.address}</p>
+              <p className="text-sm font-body underline">
+                <a target="_blank" aria-label="Instagram" href={studio.instagram}>
+                  @{studio.instagram.split("/").slice(-2, -1)}
+                </a>
+              </p>
+            </div>
           </div>
-        </div>
-
-        <div className="relative">
-          <img
-            src={mothAndFlameShopfront}
-            alt="Moth and Flame Shop"
-            className="w-full h-auto object-cover"
-          />
-          <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-center text-white p-4">
-            <h3 className="text-2xl font-display mb-4">Moth and Flame Tattoo</h3>
-            <p className="text-sm font-body mb-4">79 Bromley Common, Bromley, BR2 9LP</p>
-            <p className="text-sm font-body underline"><a target="_blank" aria-label="Instagram" href="https://www.instagram.com/mothandflametattoo/">@mothandflametattoo</a></p>
-          </div>
-        </div>
+        ))}
       </div>
     </PageTransition>
   )

@@ -15,7 +15,7 @@ export default function Gallery() {
           throw new Error('Failed to fetch image URLs');
         }
         const data = await response.json();
-        setImages(data);
+        setImages(data.reverse()); // Reverse the array to show the most recent images first
         setLoading(false);
       } catch (error) {
         console.error('Error fetching image URLs:', error);
