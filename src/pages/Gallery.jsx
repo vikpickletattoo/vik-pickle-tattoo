@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import PageTransition from '../components/PageTransition.jsx';
+import galleryBanner from '../assets/gallery-banner.JPG'; // Import the image
 
 export default function Gallery() {
   const [images, setImages] = useState([]);
@@ -28,7 +29,14 @@ export default function Gallery() {
 
   return (
     <PageTransition>
-      <div className="bg-ink pt-40 pb-24 px-6 text-center">
+      <div
+        className="pt-40 pb-24 px-6 text-center"
+        style={{
+          backgroundImage: `url(${galleryBanner})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
         <h1 className="font-display text-5xl md:text-6xl text-cream leading-tight">
           Recent work
         </h1>

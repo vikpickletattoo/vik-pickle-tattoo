@@ -1,22 +1,9 @@
 import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import emailjs from '@emailjs/browser'
 import PageTransition from '../components/PageTransition.jsx'
+import contactBanner from '../assets/contact-banner.JPG'
 
-// EmailJS values are read from .env (see .env.example)
-const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
-const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
-const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-
-const PROJECT_TYPES = [
-  'Traditional',
-  'Japanese',
-  'Neo-traditional',
-  'Custom work',
-  'Other',
-]
-
-const EMPTY = { from_name: '', from_email: '', project_type: '', message: '' }
+const EMPTY = { name: '', from_email: '', tattoo_idea: '', approx_size: '', colour_preference: '', placement: '', existing_pieces: '', availability: '' }
 
 const labelClass = 'block text-xs tracking-widest uppercase text-ink/50 mb-2'
 
@@ -30,19 +17,40 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setStatus('sending')
+
     try {
-      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY)
-      setStatus('success')
-      setForm(EMPTY)
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: '5836a4fe-b450-4196-ac44-20ce93dad79e',
+          ...form,
+        }),
+      })
+
+      if (response.ok) {
+        setStatus('success')
+        setForm(EMPTY)
+      } else {
+        setStatus('error')
+      }
     } catch (err) {
-      console.error('EmailJS error:', err)
       setStatus('error')
     }
   }
 
   return (
     <PageTransition>
-      <div className="bg-ink pt-40 pb-24 px-6 text-center">
+      <div
+        className="pt-40 pb-24 px-6 text-center"
+        style={{
+          backgroundImage: `url(${contactBanner})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
         <h1 className="font-display text-5xl md:text-6xl text-cream leading-tight">Get in touch</h1>
       </div>
 
@@ -59,73 +67,67 @@ export default function Contact() {
               >
                 <p className="font-display text-2xl text-ink mb-3">Thank you.</p>
                 <p className="text-ink/60 font-body font-light text-sm leading-relaxed">
-                  Your message is on its way. We aim to reply within two working days.
+                  Your message has been sent, I'll get back to you as soon as possible!
                 </p>
                 <button onClick={() => setStatus('idle')} className="mt-8 btn-primary">
                   Send another
                 </button>
               </motion.div>
             ) : (
-              <form ref={formRef} onSubmit={handleSubmit} className="space-y-8">
+              <form onSubmit={handleSubmit} className="space-y-8">
                 <div>
-                  <label className={labelClass} htmlFor="from_name">Your name</label>
-                  <input id="from_name" name="from_name" type="text" required value={form.from_name} onChange={handleChange} className="input-field" />
+                  <label className={labelClass} htmlFor="name">Your name</label>
+                  <input id="name" name="name" type="text" required value={form.name} onChange={handleChange} className="input-field" />
                 </div>
                 <div>
                   <label className={labelClass} htmlFor="from_email">Email address</label>
                   <input id="from_email" name="from_email" type="email" required value={form.from_email} onChange={handleChange} className="input-field" />
                 </div>
                 <div>
-                  <label className={labelClass} htmlFor="message">Tell me about your tattoo idea - describe your idea, as much detail as possible!</label>
+                  <label className={labelClass} htmlFor="tattoo_idea">Tell me about your tattoo idea - describe your idea, as much detail as possible!</label>
                   <textarea
-                    id="message"
-                    name="message"
+                    id="tattoo_idea"
+                    name="tattoo_idea"
                     required
                     rows={3}
-                    value={form.main_message}
+                    value={form.tattoo_idea}
                     onChange={handleChange}
                     placeholder="Tell me about your tattoo idea - describe your idea, as much detail as possible!"
                     className="input-field resize-none"
                   />
                 </div>
                 <div>
-                  <label className={labelClass} htmlFor="from_email">Approximate size (cm/inches)</label>
-                  <input id="from_email" name="from_email" type="email" required value={form.approx_size} placeholder="eg: 10cm" onChange={handleChange} className="input-field" />
+                  <label className={labelClass} htmlFor="approx_size">Approximate size (cm/inches)</label>
+                  <input id="approx_size" name="approx_size" type="text" required value={form.approx_size} placeholder="eg: 10cm" onChange={handleChange} className="input-field" />
                 </div>
                 <div>
-                  <label className={labelClass} htmlFor="from_email">Colour, or black & grey?</label>
-                  <input id="from_email" name="from_email" type="email" required value={form.colour_preference} placeholder="eg: Black & grey" onChange={handleChange} className="input-field" />
+                  <label className={labelClass} htmlFor="colour_preference">Colour, or black & grey?</label>
+                  <input id="colour_preference" name="colour_preference" type="text" required value={form.colour_preference} placeholder="eg: Black & grey" onChange={handleChange} className="input-field" />
                 </div>
                 <div>
-                  <label className={labelClass} htmlFor="from_email">Placement, where would you like your tattoo to go?</label>
-                  <input id="from_email" name="from_email" type="email" required value={form.placement} placeholder="eg: Inner bicep" onChange={handleChange} className="input-field" />
+                  <label className={labelClass} htmlFor="placement">Placement, where would you like your tattoo to go?</label>
+                  <input id="placement" name="placement" type="text" required value={form.placement} placeholder="eg: Inner bicep" onChange={handleChange} className="input-field" />
                 </div>
                 <div>
-                  <label className={labelClass} htmlFor="from_email">Any existing tattoos that we'd need to work around?</label>
-                  <input id="from_email" name="from_email" type="email" required value={form.existing_pieces} placeholder="eg: I have a small piece towards inner elbow" onChange={handleChange} className="input-field" />
+                  <label className={labelClass} htmlFor="existing_pieces">Any existing tattoos that we'd need to work around?</label>
+                  <input id="existing_pieces" name="existing_pieces" type="text" required value={form.existing_pieces} placeholder="eg: I have a small piece towards inner elbow" onChange={handleChange} className="input-field" />
                 </div>
                 <div>
-                  <label className={labelClass} htmlFor="from_email">Availability, can you do weekdays or prefer weekends?</label>
-                  <input id="from_email" name="from_email" type="email" required value={form.availability} placeholder="eg: I'm only available on Saturdays" onChange={handleChange} className="input-field" />
+                  <label className={labelClass} htmlFor="availability">Availability, can you do weekdays or prefer weekends?</label>
+                  <input id="availability" name="availability" type="text" required value={form.availability} placeholder="eg: I'm only available on Saturdays" onChange={handleChange} className="input-field" />
                 </div>
-                {/* <div>
-                  <label className={labelClass} htmlFor="project_type">Tattoo type</label>
-                  <select id="project_type" name="project_type" value={form.project_type} onChange={handleChange} className="input-field bg-transparent">
-                    <option value="">Select one…</option>
-                    {PROJECT_TYPES.map((t) => (
-                      <option key={t} value={t}>{t}</option>
-                    ))}
-                  </select>
-                </div> */}
 
                 {status === 'error' && (
                   <p className="text-red-600 text-xs font-body">
-                    Something went wrong — please try emailing me directly at vikpickletattoo@protonmail.com
+                    Something went wrong — please try again later.
                   </p>
                 )}
 
-                <button type="submit" disabled className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed">
-                {/* <button type="submit" disabled={status === 'sending'} className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"> */}
+                <button
+                  type="submit"
+                  disabled={status === 'sending'}
+                  className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                >
                   {status === 'sending' ? 'Sending…' : 'Send enquiry'}
                 </button>
               </form>

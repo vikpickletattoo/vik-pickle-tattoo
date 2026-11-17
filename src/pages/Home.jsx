@@ -49,7 +49,7 @@ export default function Home() {
           <div className="mb-14 text-center">
             <h2 className="section-title">Vik Pickle Tattoo</h2>
             <p className="mt-5 mb-3">
-              I started in 2018 having developed my style in Japanese as well as traditional tattooing, dotwork and fine line. I work in both colour and black and grey, with custom pieces and flash work. Getting a tattoo is a personal experience with trust, communication and qiality of work being essential elements in my process and the experience I offer.
+              I started in 2018 having developed my style in Japanese as well as traditional tattooing, dotwork and fine line. I work in both colour and black and grey, with custom pieces and flash work. Getting a tattoo is a personal experience with trust, communication and quality of work being essential elements in my process and the experience I offer.
             </p>
           </div>
 

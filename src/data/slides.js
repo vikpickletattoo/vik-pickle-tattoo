@@ -1,7 +1,7 @@
-import hero1 from '../assets/hero/hero-1.png'
-import hero2 from '../assets/hero/hero-2.JPG'
+import hero1 from '../assets/hero/hero-1.PNG'
+import hero2 from '../assets/hero/hero-2.PNG'
 import hero3 from '../assets/hero/hero-3.png'
-import hero4 from '../assets/hero/hero-4.JPG'
+import hero4 from '../assets/hero/hero-4.png'
 import hero5 from '../assets/hero/hero-5.png'
 
 export const slides = [
