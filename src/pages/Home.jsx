@@ -5,14 +5,6 @@ import Hero from '../components/Hero.jsx'
 import mothAndFlameShopfront from '../assets/moth-and-flame.png'
 import oldMagicShopfront from '../assets/old-magic.jpeg'
 
-
-const services = [
-  { title: 'Traditional', desc: 'short descriptions' },
-  { title: 'Japanese Traditional', desc: 'short descriptions' },
-  { title: 'Fine line', desc: 'short descriptions' },
-  { title: 'Custom work', desc: 'short descriptions' },
-]
-
 const studios = [
   {
     name: "Old Magic Tattoo",
@@ -46,29 +38,11 @@ export default function Home() {
 
       <section className="bg-cream py-24 px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-14 text-center">
+          <div className="text-center">
             <h2 className="section-title">Vik Pickle Tattoo</h2>
-            <p className="mt-5 mb-3">
-              I started in 2018 having developed my style in Japanese as well as traditional tattooing, dotwork and fine line. I work in both colour and black and grey, with custom pieces and flash work. Getting a tattoo is a personal experience with trust, communication and quality of work being essential elements in my process and the experience I offer.
+            <p className="mt-5">
+              I started in 2018 having developed my style in <span className="font-semibold">Japanese</span> as well as <span className="font-semibold">traditional</span> tattooing, <span className="font-semibold">dotwork</span> and <span className="font-semibold">fine line</span>. I work in both colour and black and grey, with custom pieces and flash work. Getting a tattoo is a personal experience with trust, communication and quality of work being essential elements in my process and the experience I offer.
             </p>
-          </div>
-
-          <h2 className="text-3xl flex justify-center mb-10">Specialities</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((s, i) => (
-              <motion.div
-                key={s.title}
-                custom={i}
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                className="border-t border-gold pt-6"
-              >
-                <h3 className="font-display text-xl text-ink mb-3">{s.title}</h3>
-                {/* <p className="text-ink/60 font-body font-light text-sm leading-relaxed">{s.desc}</p> */}
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
